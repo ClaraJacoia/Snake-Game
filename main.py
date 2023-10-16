@@ -17,11 +17,11 @@ rosa = (255, 105, 180)
 preta = (0, 0, 0)
 
 # parametros da cobrinha
-cabeca_cobra = pygame.image.load("C:\\JogoCobrinha2\\pixil-frame-0.png")
-corpo_cobra = pygame.image.load("C:\\JogoCobrinha2\pixil-frame-0 (1).png")
-cauda_cobra = pygame.image.load("C:\\JogoCobrinha2\\pixil-frame-0 (3).png")
-comida = pygame.image.load("C:\\JogoCobrinha2\\pixil-frame-0 (2).png")
-boost = pygame.transform.scale(pygame.image.load("C:\\JogoCobrinha2\\raio.png"), (30, 30))
+cabeca_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0.png")
+corpo_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0 (1).png")
+cauda_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0 (3).png")
+comida = pygame.image.load("C:\\Snake-Game\\imagens\\nemo.png")
+boost = pygame.transform.scale(pygame.image.load("C:\\Snake-Game\\imagens\\raio.png"), (30, 30))
 velocidade_jogo = 20
 tamanho_quadrado = 25
 
@@ -132,8 +132,8 @@ def selecionar_velocidade(tecla):
 
 
 def desenhar_pontuacao(pontuacao):
-    fonte = pygame.font.SysFont("Helvetica", 35)
-    texto = fonte.render(f"Pontos: {pontuacao}", True, vermelho)
+    fonte = pygame.font.SysFont("Consolas", 35, 1)
+    texto = fonte.render(f"Pontos: {pontuacao}", True, (25,25,112))
     tela.blit(texto, [1, 1])
 
 
@@ -168,7 +168,11 @@ def rodar_jogo():
         pixels.pop(0)
 
     while not fim_jogo:
-        tela.fill(azul)
+        pygame.init()
+        surface = pygame.display.set_mode((1000, 700))
+        color = (0,191,255)
+        surface.fill(color)
+        pygame.display.flip()
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
