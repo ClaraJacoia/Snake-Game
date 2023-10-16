@@ -9,20 +9,20 @@ relogio = pygame.time.Clock()
 fonte = pygame.font.Font(None, 36)
 
 # cores
-azul = (0, 0, 255)
+azul = (0,191,255)
 branca = (255, 255, 255)
 vermelho = (255, 0, 0)
 verde = (0, 255, 0)
 rosa = (255, 105, 180)
 preta = (0, 0, 0)
 
-# parametros da cobrinha
+# parametros da cobrinhas
 cabeca_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0.png")
 corpo_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0 (1).png")
 cauda_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0 (3).png")
 comida = pygame.image.load("C:\\Snake-Game\\imagens\\nemo.png")
 boost = pygame.transform.scale(pygame.image.load("C:\\Snake-Game\\imagens\\raio.png"), (30, 30))
-velocidade_jogo = 20
+velocidade_jogo = 10
 tamanho_quadrado = 25
 
 
@@ -168,11 +168,7 @@ def rodar_jogo():
         pixels.pop(0)
 
     while not fim_jogo:
-        pygame.init()
-        surface = pygame.display.set_mode((1000, 700))
-        color = (0,191,255)
-        surface.fill(color)
-        pygame.display.flip()
+        tela.fill(azul)
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
