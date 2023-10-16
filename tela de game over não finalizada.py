@@ -17,10 +17,10 @@ rosa = (255, 105, 180)
 preta = (0,0,0)
 
 #parametros da cobrinha
-cabeca_cobra = pygame.image.load("C:\\JogoCobrinha2\\pixil-frame-0.png")
-corpo_cobra = pygame.image.load("C:\\JogoCobrinha2\pixil-frame-0 (1).png")
-cauda_cobra = pygame.image.load("C:\\JogoCobrinha2\\pixil-frame-0 (3).png")
-comida = pygame.image.load("C:\\JogoCobrinha2\\pixil-frame-0 (2).png")
+cabeca_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0.png")
+corpo_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0 (1).png")
+cauda_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0 (3).png")
+comida = pygame.image.load("C:\\Snake-Game\\imagens\\nemo.png")
 velocidade_inicial = 22
 velocidade_atual = 5
 tamanho_quadrado = 25
