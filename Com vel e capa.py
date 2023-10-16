@@ -3,7 +3,7 @@ import random
 
 pygame.init()
 pygame.display.set_caption("Jogo da cobrinha")
-largura, altura = 1600, 800
+largura, altura = 1000, 700
 tela = pygame.display.set_mode((largura, altura))
 relogio = pygame.time.Clock()
 fonte = pygame.font.Font(None, 36)
@@ -16,10 +16,10 @@ verde = (0, 255, 0)
 rosa = (255, 105, 180)
 
 #parametros da cobrinha
-cabeca_cobra = pygame.image.load("C:\\JogoCobrinha2\\pixil-frame-0.png")
-corpo_cobra = pygame.image.load("C:\\JogoCobrinha2\pixil-frame-0 (1).png")
-cauda_cobra = pygame.image.load("C:\\JogoCobrinha2\\pixil-frame-0 (3).png")
-comida = pygame.image.load("C:\\JogoCobrinha2\\pixil-frame-0 (2).png")
+cabeca_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0.png")
+corpo_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0 (1).png")
+cauda_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0 (3).png")
+comida = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0 (2).png")
 velocidade_inicial = 22
 velocidade_atual = 5
 tamanho_quadrado = 25
