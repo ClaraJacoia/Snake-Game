@@ -38,8 +38,10 @@ def tela_inicial():
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 150))
     texto_titulo = fonte.render("Coma os nemos e fuja das paredes e de você mesmo", True, azul)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 200))
-    texto_titulo = fonte.render("Lembrando que o raio te deixa mais rápido. Use com cautela!", True, azul)
+    texto_titulo = fonte.render("O raio te deixa mais rápido mas te dá o dobro de pontos", True, azul)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 250))
+    texto_titulo = fonte.render("Use com cautela!", True, azul)
+    tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 300))
     texto_instrucoes = fonte.render("Pressione ESPAÇO para começar", True, branca)
     tela.blit(texto_instrucoes, (largura // 2 - texto_instrucoes.get_width() // 2, 500))
 
@@ -55,7 +57,7 @@ def tela_inicial():
                 aguardando_inicio = False
 
 
-def tela_final(pontuacao):  # problemas: Precisa colocar a pontuação
+def tela_final(pontuacao):  
     tela.fill(preta)
     texto_titulo = fonte.render("Game Over", True, rosa)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 100))
@@ -80,8 +82,8 @@ def tela_final(pontuacao):  # problemas: Precisa colocar a pontuação
                 if evento.key == pygame.K_SPACE:
                     aguardando_escolha = False
                     # O jogador escolheu jogar novamente
-                    rodar_jogo()
-                    tela_final(tamanho_cobra - 1)
+                    pontuacao = rodar_jogo()
+                    tela_final(pontuacao)
 
                 elif evento.key == pygame.K_ESCAPE:
                     pygame.quit()
@@ -156,18 +158,27 @@ def mostra_temporizador(tempo_boost):
     texto = fonte.render(f"Boost: {tempo_boost + 1}", True, (25,25,112))
     tela.blit(texto, (0, 40))
 
+def pontos(pontuacao):
+    pontuacao = 0
+    while boost_ativo:
+            if x == posicao_x_comida and y == posicao_y_comida:
+                pontuacao += 2
+    if x == posicao_x_comida and y == posicao_y_comida:
+        pontuacao += 1 
+
 def rodar_jogo():
     fim_jogo = False
-    pontuacao = 0
     global velocidade_jogo
-
+    global pontuacao
+    global tamanho_cobra
+    pontuacao = 0
     x = largura / 2
     y = altura / 2
 
     velocidade_x = 0
     velocidade_y = 0
 
-    global tamanho_cobra
+
     tamanho_cobra = 1
     count_boost = 1
     fase = 1
@@ -269,7 +280,7 @@ def rodar_jogo():
         desenhar_cobra(pixels, corpo_cobra)
 
         # desenhar pontuação
-        desenhar_pontuacao(tamanho_cobra - 1)
+        desenhar_pontuacao(pontuacao)
 
         tempo_atual = pygame.time.get_ticks()
 
@@ -281,6 +292,11 @@ def rodar_jogo():
         # criar uma nova comida
         if x == posicao_x_comida and y == posicao_y_comida:
             tamanho_cobra += 1
+            if boost_ativo:
+                pontuacao += 2
+            else:
+                pontuacao += 1
+
             count_boost += 1
             posicao_x_comida, posicao_y_comida = gerar_comida()
 
@@ -305,10 +321,10 @@ def rodar_jogo():
         
         # tempo de jogo
         relogio.tick(velocidade_jogo)
-
+    return pontuacao 
 tela_inicial()
 while True:  # Loop principal do jogo
-    rodar_jogo()
-    tela_final(tamanho_cobra - 1) 
+    pontuacao = rodar_jogo()
+    tela_final(pontuacao) 
 
 tela_final()
