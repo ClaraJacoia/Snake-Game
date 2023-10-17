@@ -18,9 +18,9 @@ rosa = (255, 105, 180)
 preta = (0, 0, 0)
 
 # carregamento das imagens
-cabeca_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0.png")
-corpo_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0 (1).png")
-cauda_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0 (3).png")
+cabeca_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\cabeca_cobra.png")
+corpo_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\corpo_cobra.png")
+cauda_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\cauda_cobra.png")
 comida = pygame.image.load("C:\\Snake-Game\\imagens\\nemo.png")
 boost = pygame.transform.scale(pygame.image.load("C:\\Snake-Game\\imagens\\raio.png"), (30, 30))
 anzol = pygame.transform.scale(pygame.image.load("C:\\Snake-Game\\imagens\\anzol.png"), (25, 25))
@@ -28,7 +28,6 @@ anzol = pygame.transform.scale(pygame.image.load("C:\\Snake-Game\\imagens\\anzol
 # parametros do jogo
 velocidade_jogo = 10
 tamanho_quadrado = 25
-
 
 def tela_inicial():
     texto_titulo = fonte.render("Jogo da Cobrinha", True, rosa)
@@ -245,7 +244,7 @@ def rodar_jogo():
                 (x == posicao_x_anzol+175 and y == posicao_y_anzol-100) or (x == posicao_x_anzol-250 and y == posicao_y_anzol+200) or
                 (x == posicao_x_anzol-130 and y == posicao_y_anzol+250) or (x == posicao_x_anzol+180 and y == posicao_y_anzol+250)):
                 fim_jogo = True
-        
+
         # desenhar comida
         desenhar_comida(comida, posicao_x_comida, posicao_y_comida)
 
