@@ -142,6 +142,7 @@ def rodar_jogo():
     fim_jogo = False
 
     global velocidade_jogo
+    velocidade_jogo = 10
 
     x = largura / 2
     y = altura / 2
