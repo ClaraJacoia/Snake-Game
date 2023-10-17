@@ -1,5 +1,6 @@
 import pygame
 import random
+from time import sleep
 
 pygame.init()
 pygame.display.set_caption("Jogo da cobrinha")
@@ -150,11 +151,15 @@ def desenhar_pontuacao(pontuacao):
     texto = fonte.render(f"Pontos: {pontuacao}", True, (25,25,112))
     tela.blit(texto, [1, 1])
 
+def mostra_temporizador(tempo_boost):
+    fonte = pygame.font.SysFont("Consolas", 35, 1)
+    texto = fonte.render(f"Boost: {tempo_boost + 1}", True, (25,25,112))
+    tela.blit(texto, (0, 40))
+
 def rodar_jogo():
     fim_jogo = False
     pontuacao = 0
     global velocidade_jogo
-    velocidade_jogo = 10
 
     x = largura / 2
     y = altura / 2
@@ -166,6 +171,11 @@ def rodar_jogo():
     tamanho_cobra = 1
     count_boost = 1
     fase = 1
+    
+    # variaveis para o controle do boost
+    count_boost = 1
+    boost_ativo = 0
+    duracao_boost = 3000
 
     pixels = [[largura / 2, altura / 2], [largura / 2 - tamanho_quadrado, altura / 2]]
 
@@ -186,6 +196,8 @@ def rodar_jogo():
     while not fim_jogo:
         tela.fill(azul)
 
+        tempo_atual = pygame.time.get_ticks()
+
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 fim_jogo = True
@@ -196,12 +208,17 @@ def rodar_jogo():
                     velocidade_x, velocidade_y = velocidade_x_nova, velocidade_y_nova
 
         # sistema de obstáculos - fase-1, nivel-1
-        if tamanho_cobra == 1 and fase == 1:
+        if (tamanho_cobra == 1 and fase == 1):
             desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
             desenhar_anzol(anzol, posicao_x_anzol - 100, posicao_y_anzol - 100)
             desenhar_anzol(anzol, posicao_x_anzol + 300, posicao_y_anzol - 200)
             desenhar_anzol(anzol, posicao_x_anzol - 200, posicao_y_anzol + 45)
             desenhar_anzol(anzol, posicao_x_anzol + 80, posicao_y_anzol + 30)
+            # colisões com o anzol
+            if ((x == posicao_x_anzol and y == posicao_y_anzol) or (x == posicao_x_anzol-100 and y == posicao_y_anzol-100) or
+            (x == posicao_x_anzol+300 and y == posicao_y_anzol-200) or (x == posicao_x_anzol-200 and y == posicao_y_anzol+45) or
+            (x == posicao_x_anzol+80 and y == posicao_y_anzol+30)):
+                fim_jogo = True
 
         # sistema de obstáculos - fase-1, nivel-2
         if tamanho_cobra == 2 and fase == 1:
@@ -210,6 +227,11 @@ def rodar_jogo():
              desenhar_anzol(anzol, posicao_x_anzol + 250, posicao_y_anzol + 200)
              desenhar_anzol(anzol, posicao_x_anzol - 130, posicao_y_anzol + 180)
              desenhar_anzol(anzol, posicao_x_anzol + 120, posicao_y_anzol + 250)
+             # colisões com o anzol
+             if ((x == posicao_x_anzol and y == posicao_y_anzol) or (x == posicao_x_anzol+150 and y == posicao_y_anzol-100) or
+                (x == posicao_x_anzol+250 and y == posicao_y_anzol+200) or (x == posicao_x_anzol-130 and y == posicao_y_anzol+180) or
+                (x == posicao_x_anzol+120 and y == posicao_y_anzol+250)):
+                    fim_jogo = True
 
         # sistema de obstáculos - fase-1, nivel-3
         if tamanho_cobra == 3 and fase == 1:
@@ -218,17 +240,12 @@ def rodar_jogo():
             desenhar_anzol(anzol, posicao_x_anzol - 250, posicao_y_anzol + 200)
             desenhar_anzol(anzol, posicao_x_anzol - 130, posicao_y_anzol + 250)
             desenhar_anzol(anzol, posicao_x_anzol + 180, posicao_y_anzol + 250)
-
-        # colisões com o anzol
-        if ((x == posicao_x_anzol and y == posicao_y_anzol) or
-                (x == posicao_x_anzol-100 and y == posicao_y_anzol-100) or (x == posicao_x_anzol+300 and y == posicao_y_anzol-200) or
-                (x == posicao_x_anzol-200 and y == posicao_y_anzol+45) or (x == posicao_x_anzol+80 and y == posicao_y_anzol+30) or
-                (x == posicao_x_anzol+150 and y == posicao_y_anzol-100) or (x == posicao_x_anzol+250 and y == posicao_y_anzol+200) or
-                (x == posicao_x_anzol-130 and y == posicao_y_anzol+180) or (x == posicao_x_anzol+120 and y == posicao_y_anzol+250) or
+            # colisões com o anzol
+            if ((x == posicao_x_anzol and y == posicao_y_anzol) or
                 (x == posicao_x_anzol+175 and y == posicao_y_anzol-100) or (x == posicao_x_anzol-250 and y == posicao_y_anzol+200) or
                 (x == posicao_x_anzol-130 and y == posicao_y_anzol+250) or (x == posicao_x_anzol+180 and y == posicao_y_anzol+250)):
-            fim_jogo = True
-
+                fim_jogo = True
+        
         # desenhar comida
         desenhar_comida(comida, posicao_x_comida, posicao_y_comida)
 
@@ -254,8 +271,12 @@ def rodar_jogo():
         # desenhar pontuação
         desenhar_pontuacao(tamanho_cobra - 1)
 
+        tempo_atual = pygame.time.get_ticks()
+
+
         # atualização da tela
         pygame.display.update()
+
 
         # criar uma nova comida
         if x == posicao_x_comida and y == posicao_y_comida:
@@ -265,8 +286,23 @@ def rodar_jogo():
 
         if x == posicao_x_boost and y == posicao_y_boost:
             count_boost += 1
-            velocidade_jogo = 30
+            boost_ativo = 1
+            tempo_inicial = pygame.time.get_ticks()
 
+        if boost_ativo and tempo_atual - tempo_inicial <= duracao_boost:
+            velocidade_jogo = 30
+            tempo_decorrido = pygame.time.get_ticks() - tempo_inicial
+            tempo_restante = max(0, duracao_boost - tempo_decorrido)
+            mostra_temporizador(tempo_restante // 1000)
+        
+            # atualiza o retangulo no qual o temporizador esta inserido para que seja possivel a contagem regressiva do tempo do boost
+
+            pygame.display.update([0, 0, 100, 100])
+        else:
+            velocidade_jogo = 10
+            boost_ativo = 0
+
+        
         # tempo de jogo
         relogio.tick(velocidade_jogo)
 
