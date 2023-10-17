@@ -1,5 +1,6 @@
 import pygame
 import random
+from time import sleep
 
 pygame.init()
 pygame.display.set_caption("Jogo da cobrinha")
@@ -17,11 +18,11 @@ rosa = (255, 105, 180)
 preta = (0, 0, 0)
 
 # parametros da cobrinhas
-cabeca_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0.png")
-corpo_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0 (1).png")
-cauda_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0 (3).png")
-comida = pygame.image.load("C:\\Snake-Game\\imagens\\nemo.png")
-boost = pygame.transform.scale(pygame.image.load("C:\\Snake-Game\\imagens\\raio.png"), (30, 30))
+cabeca_cobra = pygame.image.load("./imagens/pixil-frame-0.png")
+corpo_cobra = pygame.image.load("./imagens/pixil-frame-0 (1).png")
+cauda_cobra = pygame.image.load("./imagens/pixil-frame-0 (3).png")
+comida = pygame.image.load("./imagens/nemo.png")
+boost = pygame.transform.scale(pygame.image.load("./imagens/raio.png"), (30, 30))
 velocidade_jogo = 10
 tamanho_quadrado = 25
 
@@ -145,6 +146,11 @@ def desenhar_pontuacao(pontuacao):
     texto = fonte.render(f"Pontos: {pontuacao}", True, (25,25,112))
     tela.blit(texto, [1, 1])
 
+def mostra_temporizador(tempo_boost):
+    fonte = pygame.font.SysFont("Consolas", 35, 1)
+    texto = fonte.render(f"Boost: {tempo_boost + 1}", True, (25,25,112))
+    tela.blit(texto, (0, 40))
+
 def rodar_jogo():
     fim_jogo = False
     pontuacao = 0
@@ -158,8 +164,11 @@ def rodar_jogo():
 
     global tamanho_cobra
     tamanho_cobra = 1
+    
+    # variaveis para o controle do boost
     count_boost = 1
     boost_ativo = 0
+    duracao_boost = 3000
 
     pixels = [[largura / 2, altura / 2], [largura / 2 - tamanho_quadrado, altura / 2]]
 
@@ -215,10 +224,12 @@ def rodar_jogo():
         # desenhar pontuação
         desenhar_pontuacao(tamanho_cobra - 1)
 
+        tempo_atual = pygame.time.get_ticks()
+
+
         # atualização da tela
         pygame.display.update()
 
-        tempo_atual = pygame.time.get_ticks()
 
         # criar uma nova comida
         if x == posicao_x_comida and y == posicao_y_comida:
@@ -231,11 +242,19 @@ def rodar_jogo():
             boost_ativo = 1
             tempo_inicial = pygame.time.get_ticks()
 
-        if boost_ativo and tempo_atual - tempo_inicial <= 3000:
+        if boost_ativo and tempo_atual - tempo_inicial <= duracao_boost:
             velocidade_jogo = 30
+            tempo_decorrido = pygame.time.get_ticks() - tempo_inicial
+            tempo_restante = max(0, duracao_boost - tempo_decorrido)
+            mostra_temporizador(tempo_restante // 1000)
+        
+            # atualiza o retangulo no qual o temporizador esta inserido para que seja possivel a contagem regressiva do tempo do boost
+
+            pygame.display.update([0, 0, 100, 100])
         else:
             velocidade_jogo = 10
             boost_ativo = 0
+
         
         # tempo de jogo
         relogio.tick(velocidade_jogo)
