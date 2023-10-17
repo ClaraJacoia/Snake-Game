@@ -52,7 +52,7 @@ def tela_inicial():
                 aguardando_inicio = False
 
 
-def tela_final(pontuacao): 
+def tela_final(pontuacao):  # problemas: Precisa colocar a pontuação
     tela.fill(preta)
     texto_titulo = fonte.render("Game Over", True, rosa)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 100))
@@ -119,6 +119,9 @@ def desenhar_boost(boost, posicao_x_boost, posicao_y_boost):
 
 
 def selecionar_velocidade(tecla):
+    velocidade_x = 0
+    velocidade_y = 0
+
     if tecla == pygame.K_s:
         posicao_atual = "Baixo"
         velocidade_x = 0
@@ -134,6 +137,7 @@ def selecionar_velocidade(tecla):
     if tecla == pygame.K_a:
         velocidade_x = -tamanho_quadrado
         velocidade_y = 0
+
     return velocidade_x, velocidade_y
 
 
@@ -181,7 +185,10 @@ def rodar_jogo():
             if evento.type == pygame.QUIT:
                 fim_jogo = True
             elif evento.type == pygame.KEYDOWN:
-                velocidade_x, velocidade_y = selecionar_velocidade(evento.key)
+                velocidade_x_nova, velocidade_y_nova = selecionar_velocidade(evento.key)
+                if velocidade_x_nova != 0 or velocidade_y_nova != 0:
+                    # Atualiza a direção apenas se a nova direção for válida
+                    velocidade_x, velocidade_y = velocidade_x_nova, velocidade_y_nova
 
         # desenhar comida
         desenhar_comida(comida, posicao_x_comida, posicao_y_comida)
