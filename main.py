@@ -8,7 +8,6 @@ tela = pygame.display.set_mode((largura, altura))
 relogio = pygame.time.Clock()
 fonte = pygame.font.Font(None, 36)
 
-
 # cores
 azul = (0,191,255)
 branca = (255, 255, 255)
@@ -17,12 +16,15 @@ verde = (0, 255, 0)
 rosa = (255, 105, 180)
 preta = (0, 0, 0)
 
-# parametros da cobrinhas
+# carregamento das imagens
 cabeca_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0.png")
 corpo_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0 (1).png")
 cauda_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\pixil-frame-0 (3).png")
 comida = pygame.image.load("C:\\Snake-Game\\imagens\\nemo.png")
 boost = pygame.transform.scale(pygame.image.load("C:\\Snake-Game\\imagens\\raio.png"), (30, 30))
+anzol = pygame.transform.scale(pygame.image.load("C:\\Snake-Game\\imagens\\anzol.png"), (25, 25))
+
+# parametros do jogo
 velocidade_jogo = 10
 tamanho_quadrado = 25
 
@@ -79,12 +81,10 @@ def tela_final(pontuacao):  # problemas: Precisa colocar a pontuação
                     # O jogador escolheu jogar novamente
                     rodar_jogo()
                     tela_final(tamanho_cobra - 1)
-                    
-                    
+
                 elif evento.key == pygame.K_ESCAPE:
                     pygame.quit()
                     quit()
-
 
 def gerar_comida():
     posicao_x_comida = round(random.randrange(40, largura - tamanho_quadrado + 15) / float(tamanho_quadrado)) * float(
@@ -100,6 +100,10 @@ def gerar_boost():
         tamanho_quadrado)
     return posicao_x_boost, posicao_y_boost
 
+def gerar_anzol():
+    posicao_x_anzol = 300
+    posicao_y_anzol = 400
+    return posicao_x_anzol, posicao_y_anzol
 
 def desenhar_cobra(pixels, corpo_cobra):
     tela.blit(cauda_cobra, [pixels[0][0], pixels[0][1]])
@@ -110,13 +114,14 @@ def desenhar_cobra(pixels, corpo_cobra):
     # desenha a cabeça da cobra por último
     tela.blit(cabeca_cobra, [pixels_invertidos[0][0], pixels_invertidos[0][1]])
 
-
 def desenhar_comida(comida, posicao_x_comida, posicao_y_comida):
     tela.blit(comida, [posicao_x_comida, posicao_y_comida])
 
 def desenhar_boost(boost, posicao_x_boost, posicao_y_boost):
     tela.blit(boost, [posicao_x_boost, posicao_y_boost])
 
+def desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol):
+    tela.blit(anzol, [posicao_x_anzol, posicao_y_anzol])
 
 def selecionar_velocidade(tecla):
     velocidade_x = 0
@@ -140,12 +145,10 @@ def selecionar_velocidade(tecla):
 
     return velocidade_x, velocidade_y
 
-
 def desenhar_pontuacao(pontuacao):
     fonte = pygame.font.SysFont("Consolas", 35, 1)
     texto = fonte.render(f"Pontos: {pontuacao}", True, (25,25,112))
     tela.blit(texto, [1, 1])
-
 
 def rodar_jogo():
     fim_jogo = False
@@ -161,12 +164,14 @@ def rodar_jogo():
 
     global tamanho_cobra
     tamanho_cobra = 1
-    count_boost = 1 
+    count_boost = 1
+    fase = 1
 
     pixels = [[largura / 2, altura / 2], [largura / 2 - tamanho_quadrado, altura / 2]]
 
     posicao_x_comida, posicao_y_comida = gerar_comida()
     posicao_x_boost, posicao_y_boost = gerar_boost()
+    posicao_x_anzol, posicao_y_anzol = gerar_anzol()
 
     if x == posicao_x_comida and y == posicao_y_comida:
         # adicione a posição da comida ao corpo da cobra
@@ -189,6 +194,40 @@ def rodar_jogo():
                 if velocidade_x_nova != 0 or velocidade_y_nova != 0:
                     # Atualiza a direção apenas se a nova direção for válida
                     velocidade_x, velocidade_y = velocidade_x_nova, velocidade_y_nova
+
+        # sistema de obstáculos - fase-1, nivel-1
+        if tamanho_cobra == 1 and fase == 1:
+            desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
+            desenhar_anzol(anzol, posicao_x_anzol - 100, posicao_y_anzol - 100)
+            desenhar_anzol(anzol, posicao_x_anzol + 300, posicao_y_anzol - 200)
+            desenhar_anzol(anzol, posicao_x_anzol - 200, posicao_y_anzol + 45)
+            desenhar_anzol(anzol, posicao_x_anzol + 80, posicao_y_anzol + 30)
+
+        # sistema de obstáculos - fase-1, nivel-2
+        if tamanho_cobra == 2 and fase == 1:
+             desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
+             desenhar_anzol(anzol, posicao_x_anzol + 150, posicao_y_anzol - 100)
+             desenhar_anzol(anzol, posicao_x_anzol + 250, posicao_y_anzol + 200)
+             desenhar_anzol(anzol, posicao_x_anzol - 130, posicao_y_anzol + 180)
+             desenhar_anzol(anzol, posicao_x_anzol + 120, posicao_y_anzol + 250)
+
+        # sistema de obstáculos - fase-1, nivel-3
+        if tamanho_cobra == 3 and fase == 1:
+            desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
+            desenhar_anzol(anzol, posicao_x_anzol + 175, posicao_y_anzol - 100)
+            desenhar_anzol(anzol, posicao_x_anzol - 250, posicao_y_anzol + 200)
+            desenhar_anzol(anzol, posicao_x_anzol - 130, posicao_y_anzol + 250)
+            desenhar_anzol(anzol, posicao_x_anzol + 180, posicao_y_anzol + 250)
+
+        # colisões com o anzol
+        if ((x == posicao_x_anzol and y == posicao_y_anzol) or
+                (x == posicao_x_anzol-100 and y == posicao_y_anzol-100) or (x == posicao_x_anzol+300 and y == posicao_y_anzol-200) or
+                (x == posicao_x_anzol-200 and y == posicao_y_anzol+45) or (x == posicao_x_anzol+80 and y == posicao_y_anzol+30) or
+                (x == posicao_x_anzol+150 and y == posicao_y_anzol-100) or (x == posicao_x_anzol+250 and y == posicao_y_anzol+200) or
+                (x == posicao_x_anzol-130 and y == posicao_y_anzol+180) or (x == posicao_x_anzol+120 and y == posicao_y_anzol+250) or
+                (x == posicao_x_anzol+175 and y == posicao_y_anzol-100) or (x == posicao_x_anzol-250 and y == posicao_y_anzol+200) or
+                (x == posicao_x_anzol-130 and y == posicao_y_anzol+250) or (x == posicao_x_anzol+180 and y == posicao_y_anzol+250)):
+            fim_jogo = True
 
         # desenhar comida
         desenhar_comida(comida, posicao_x_comida, posicao_y_comida)
@@ -230,7 +269,6 @@ def rodar_jogo():
 
         # tempo de jogo
         relogio.tick(velocidade_jogo)
-
 
 tela_inicial()
 while True:  # Loop principal do jogo
