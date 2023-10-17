@@ -51,7 +51,7 @@ def tela_inicial():
                 aguardando_inicio = False
 
 
-def tela_final():  # problemas: só funciona uma vez. Quando clica pra jogar de novo volta na velocidade que tava antes. Precisa colocar a pontuação
+def tela_final():  # problemas: Quando clica pra jogar de novo volta na velocidade que tava antes. Precisa colocar a pontuação
     tela.fill(preta)
     texto_titulo = fonte.render("Game Over", True, rosa)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 100))
@@ -75,6 +75,7 @@ def tela_final():  # problemas: só funciona uma vez. Quando clica pra jogar de 
                     aguardando_escolha = False
                     # O jogador escolheu jogar novamente
                     rodar_jogo()
+                    tela_final()
                 elif evento.key == pygame.K_ESCAPE:
                     pygame.quit()
                     quit()
