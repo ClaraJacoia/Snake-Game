@@ -8,7 +8,6 @@ tela = pygame.display.set_mode((largura, altura))
 relogio = pygame.time.Clock()
 fonte = pygame.font.Font(None, 36)
 
-
 # cores
 azul = (0,191,255)
 branca = (255, 255, 255)
@@ -146,12 +145,10 @@ def desenhar_pontuacao(pontuacao):
     texto = fonte.render(f"Pontos: {pontuacao}", True, (25,25,112))
     tela.blit(texto, [1, 1])
 
-
 def rodar_jogo():
     fim_jogo = False
     pontuacao = 0
     global velocidade_jogo
-    velocidade_jogo = 10
 
     x = largura / 2
     y = altura / 2
@@ -161,7 +158,8 @@ def rodar_jogo():
 
     global tamanho_cobra
     tamanho_cobra = 1
-    count_boost = 1 
+    count_boost = 1
+    boost_ativo = 0
 
     pixels = [[largura / 2, altura / 2], [largura / 2 - tamanho_quadrado, altura / 2]]
 
@@ -180,6 +178,8 @@ def rodar_jogo():
 
     while not fim_jogo:
         tela.fill(azul)
+
+        tempo_atual = pygame.time.get_ticks()
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -218,6 +218,8 @@ def rodar_jogo():
         # atualização da tela
         pygame.display.update()
 
+        tempo_atual = pygame.time.get_ticks()
+
         # criar uma nova comida
         if x == posicao_x_comida and y == posicao_y_comida:
             tamanho_cobra += 1
@@ -226,8 +228,15 @@ def rodar_jogo():
 
         if x == posicao_x_boost and y == posicao_y_boost:
             count_boost += 1
-            velocidade_jogo = 30
+            boost_ativo = 1
+            tempo_inicial = pygame.time.get_ticks()
 
+        if boost_ativo and tempo_atual - tempo_inicial <= 3000:
+            velocidade_jogo = 30
+        else:
+            velocidade_jogo = 10
+            boost_ativo = 0
+        
         # tempo de jogo
         relogio.tick(velocidade_jogo)
 
