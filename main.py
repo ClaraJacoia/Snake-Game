@@ -8,6 +8,7 @@ tela = pygame.display.set_mode((largura, altura))
 relogio = pygame.time.Clock()
 fonte = pygame.font.Font(None, 36)
 
+
 # cores
 azul = (0,191,255)
 branca = (255, 255, 255)
@@ -32,7 +33,7 @@ def tela_inicial():
     # Instruções
     texto_titulo = fonte.render("Use WASD para mover a Cobrinha", True, azul)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 150))
-    texto_titulo = fonte.render("Coma as frutinhas e fuja das paredes e de você mesmo", True, azul)
+    texto_titulo = fonte.render("Coma os nemos e fuja das paredes e de você mesmo", True, azul)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 200))
     texto_titulo = fonte.render("Lembrando que o raio te deixa mais rápido. Use com cautela!", True, azul)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 250))
@@ -51,16 +52,18 @@ def tela_inicial():
                 aguardando_inicio = False
 
 
-def tela_final():  # problemas: Quando clica pra jogar de novo volta na velocidade que tava antes. Precisa colocar a pontuação
+def tela_final(pontuacao): 
     tela.fill(preta)
     texto_titulo = fonte.render("Game Over", True, rosa)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 100))
+    texto_titulo = fonte.render(f"Pontos: {pontuacao}", True, azul)
+    tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 150))
     # Novo jogo
-    jogar_de_novo = fonte.render("Pressione ESPAÇO para jogar novamente", True, azul)
-    tela.blit(jogar_de_novo, (largura // 2 - texto_titulo.get_width() // 2, 150))
+    jogar_de_novo = fonte.render("Pressione ESPAÇO para jogar novamente", True, branca)
+    tela.blit(jogar_de_novo, (largura // 3 - texto_titulo.get_width() // 1.6, 450))
     # Sair do jogo
-    sair_jogo = fonte.render("Pressione ESC para sair do jogo", True, azul)
-    tela.blit(sair_jogo, (largura // 2 - texto_titulo.get_width() // 2, 200))
+    sair_jogo = fonte.render("Pressione ESC para sair do jogo", True, branca)
+    tela.blit(sair_jogo, (largura // 3 - texto_titulo.get_width() // 6, 500))
 
     pygame.display.update()
 
@@ -75,7 +78,9 @@ def tela_final():  # problemas: Quando clica pra jogar de novo volta na velocida
                     aguardando_escolha = False
                     # O jogador escolheu jogar novamente
                     rodar_jogo()
-                    tela_final()
+                    tela_final(tamanho_cobra - 1)
+                    
+                    
                 elif evento.key == pygame.K_ESCAPE:
                     pygame.quit()
                     quit()
@@ -140,7 +145,7 @@ def desenhar_pontuacao(pontuacao):
 
 def rodar_jogo():
     fim_jogo = False
-
+    pontuacao = 0
     global velocidade_jogo
     velocidade_jogo = 10
 
@@ -150,9 +155,9 @@ def rodar_jogo():
     velocidade_x = 0
     velocidade_y = 0
 
-
+    global tamanho_cobra
     tamanho_cobra = 1
-    count_boost = 1
+    count_boost = 1 
 
     pixels = [[largura / 2, altura / 2], [largura / 2 - tamanho_quadrado, altura / 2]]
 
@@ -221,5 +226,8 @@ def rodar_jogo():
 
 
 tela_inicial()
-rodar_jogo()
+while True:  # Loop principal do jogo
+    rodar_jogo()
+    tela_final(tamanho_cobra - 1) 
+
 tela_final()
