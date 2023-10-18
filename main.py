@@ -536,7 +536,7 @@ def rodar_jogo():
             tempo_inicial = pygame.time.get_ticks()
 
         if boost_ativo and tempo_atual - tempo_inicial <= duracao_boost:
-            velocidade_jogo = 30
+            velocidade_jogo = 20
             tempo_decorrido = pygame.time.get_ticks() - tempo_inicial
             tempo_restante = max(0, duracao_boost - tempo_decorrido)
             mostra_temporizador(tempo_restante // 1000)
