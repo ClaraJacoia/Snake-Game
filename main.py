@@ -1,6 +1,5 @@
 import pygame
 import random
-from time import sleep
 
 pygame.init()
 pygame.display.set_caption("Jogo da cobrinha")
