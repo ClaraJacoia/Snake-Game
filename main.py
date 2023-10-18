@@ -157,14 +157,6 @@ def mostra_temporizador(tempo_boost):
     texto = fonte.render(f"Boost: {tempo_boost + 1}", True, (25,25,112))
     tela.blit(texto, (0, 40))
 
-def pontos(pontuacao):
-    pontuacao = 0
-    while boost_ativo:
-            if x == posicao_x_comida and y == posicao_y_comida:
-                pontuacao += 2
-    if x == posicao_x_comida and y == posicao_y_comida:
-        pontuacao += 1 
-
 def rodar_jogo():
     fim_jogo = False
     global velocidade_jogo
@@ -179,7 +171,6 @@ def rodar_jogo():
 
 
     tamanho_cobra = 1
-    count_boost = 1
     fase = 1
     
     # variaveis para o controle do boost
@@ -256,6 +247,138 @@ def rodar_jogo():
                 (x == posicao_x_anzol-125 and y == posicao_y_anzol+250) or (x == posicao_x_anzol+175 and y == posicao_y_anzol+250)):
                 fim_jogo = True
 
+        # sistema de obstáculos - fase-2, nivel-4
+        if tamanho_cobra == 4 and fase == 2:
+            desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
+            desenhar_anzol(anzol, posicao_x_anzol + 175, posicao_y_anzol - 100)
+            desenhar_anzol(anzol, posicao_x_anzol - 250, posicao_y_anzol + 200)
+            desenhar_anzol(anzol, posicao_x_anzol - 125, posicao_y_anzol + 250)
+            desenhar_anzol(anzol, posicao_x_anzol + 175, posicao_y_anzol + 250)
+            desenhar_anzol(anzol, posicao_x_anzol - 100, posicao_y_anzol - 100)
+            desenhar_anzol(anzol, posicao_x_anzol + 300, posicao_y_anzol - 200)
+            desenhar_anzol(anzol, posicao_x_anzol - 200, posicao_y_anzol + 50)
+            desenhar_anzol(anzol, posicao_x_anzol + 100, posicao_y_anzol + 25)
+            # colisões com o anzol
+            if ((x == posicao_x_anzol + 175 and y == posicao_y_anzol - 100) or (
+            x == posicao_x_anzol - 250 and y == posicao_y_anzol + 200) or
+            (x == posicao_x_anzol - 125 and y == posicao_y_anzol + 250) or (
+            x == posicao_x_anzol + 175 and y == posicao_y_anzol + 250)):
+                fim_jogo = True
+            if ((x == posicao_x_anzol and y == posicao_y_anzol) or (x == posicao_x_anzol-100 and y == posicao_y_anzol-100) or
+            (x == posicao_x_anzol+300 and y == posicao_y_anzol-200) or (x == posicao_x_anzol-200 and y == posicao_y_anzol+50) or
+            (x == posicao_x_anzol+100 and y == posicao_y_anzol+25)):
+                fim_jogo = True
+
+        # sistema de obstáculos - fase-2, nivel-5
+        if tamanho_cobra == 5 and fase == 2:
+            desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
+            desenhar_anzol(anzol, posicao_x_anzol + 150, posicao_y_anzol - 100)
+            desenhar_anzol(anzol, posicao_x_anzol + 250, posicao_y_anzol + 200)
+            desenhar_anzol(anzol, posicao_x_anzol - 125, posicao_y_anzol + 175)
+            desenhar_anzol(anzol, posicao_x_anzol + 125, posicao_y_anzol + 250)
+            desenhar_anzol(anzol, posicao_x_anzol - 100, posicao_y_anzol - 100)
+            desenhar_anzol(anzol, posicao_x_anzol + 300, posicao_y_anzol - 200)
+            desenhar_anzol(anzol, posicao_x_anzol - 200, posicao_y_anzol + 50)
+            desenhar_anzol(anzol, posicao_x_anzol + 100, posicao_y_anzol + 25)
+            # colisões com o anzol
+            if ((x == posicao_x_anzol - 100 and y == posicao_y_anzol - 100) or
+            (x == posicao_x_anzol + 300 and y == posicao_y_anzol - 200) or (
+            x == posicao_x_anzol - 200 and y == posicao_y_anzol + 50) or
+            (x == posicao_x_anzol + 100 and y == posicao_y_anzol + 25)):
+                fim_jogo = True
+            if ((x == posicao_x_anzol and y == posicao_y_anzol) or (
+                    x == posicao_x_anzol + 150 and y == posicao_y_anzol - 100) or
+                    (x == posicao_x_anzol + 250 and y == posicao_y_anzol + 200) or (
+                            x == posicao_x_anzol - 125 and y == posicao_y_anzol + 175) or
+                    (x == posicao_x_anzol + 125 and y == posicao_y_anzol + 250)):
+                fim_jogo = True
+
+        # sistema de obstáculos - fase-2, nivel-6
+        if tamanho_cobra == 6 and fase == 2:
+            desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
+            desenhar_anzol(anzol, posicao_x_anzol + 150, posicao_y_anzol - 100)
+            desenhar_anzol(anzol, posicao_x_anzol + 250, posicao_y_anzol + 200)
+            desenhar_anzol(anzol, posicao_x_anzol - 125, posicao_y_anzol + 175)
+            desenhar_anzol(anzol, posicao_x_anzol + 125, posicao_y_anzol + 250)
+            desenhar_anzol(anzol, posicao_x_anzol + 175, posicao_y_anzol - 100)
+            desenhar_anzol(anzol, posicao_x_anzol - 250, posicao_y_anzol + 200)
+            desenhar_anzol(anzol, posicao_x_anzol - 125, posicao_y_anzol + 250)
+            desenhar_anzol(anzol, posicao_x_anzol + 175, posicao_y_anzol + 250)
+            # colisões com o anzol
+            if ((x == posicao_x_anzol and y == posicao_y_anzol) or
+            (x == posicao_x_anzol + 175 and y == posicao_y_anzol - 100) or (
+            x == posicao_x_anzol - 250 and y == posicao_y_anzol + 200) or
+            (x == posicao_x_anzol - 125 and y == posicao_y_anzol + 250) or (
+            x == posicao_x_anzol + 175 and y == posicao_y_anzol + 250)):
+                fim_jogo = True
+            if ((x == posicao_x_anzol + 150 and y == posicao_y_anzol - 100) or
+            (x == posicao_x_anzol + 250 and y == posicao_y_anzol + 200) or (
+            x == posicao_x_anzol - 125 and y == posicao_y_anzol + 175) or
+            (x == posicao_x_anzol + 125 and y == posicao_y_anzol + 250)):
+                fim_jogo = True
+
+        # sistema de obstáculos - fase-3, nivel-7
+        if tamanho_cobra == 7 and fase == 3:
+            desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
+            desenhar_anzol(anzol, posicao_x_anzol - 175, posicao_y_anzol - 100)
+            desenhar_anzol(anzol, posicao_x_anzol + 350, posicao_y_anzol - 300)
+            desenhar_anzol(anzol, posicao_x_anzol + 125, posicao_y_anzol + 250)
+            desenhar_anzol(anzol, posicao_x_anzol - 175, posicao_y_anzol + 250)
+            desenhar_anzol(anzol, posicao_x_anzol + 500, posicao_y_anzol - 200)
+            desenhar_anzol(anzol, posicao_x_anzol - 300, posicao_y_anzol - 200)
+            desenhar_anzol(anzol, posicao_x_anzol + 200, posicao_y_anzol + 50)
+            desenhar_anzol(anzol, posicao_x_anzol + 400, posicao_y_anzol - 125)
+            desenhar_anzol(anzol, posicao_x_anzol - 250, posicao_y_anzol + 200)
+            desenhar_anzol(anzol, posicao_x_anzol - 125, posicao_y_anzol + 250)
+            desenhar_anzol(anzol, posicao_x_anzol + 175, posicao_y_anzol + 250)
+            # colisões com o anzol
+            if ((x == posicao_x_anzol - 175 and y == posicao_y_anzol - 100) or (
+                    x == posicao_x_anzol + 350 and y == posicao_y_anzol - 300) or
+                    (x == posicao_x_anzol + 125 and y == posicao_y_anzol + 250) or (
+                            x == posicao_x_anzol - 175 and y == posicao_y_anzol + 250)):
+                fim_jogo = True
+            if ((x == posicao_x_anzol and y == posicao_y_anzol) or (
+                x == posicao_x_anzol + 500 and y == posicao_y_anzol - 200) or
+                (x == posicao_x_anzol - 300 and y == posicao_y_anzol - 200) or (
+                x == posicao_x_anzol + 200 and y == posicao_y_anzol + 50) or
+                (x == posicao_x_anzol + 400 and y == posicao_y_anzol - 125)):
+                fim_jogo = True
+            if ((x == posicao_x_anzol - 250 and y == posicao_y_anzol + 200) or
+            (x == posicao_x_anzol - 125 and y == posicao_y_anzol + 250) or (
+            x == posicao_x_anzol + 175 and y == posicao_y_anzol + 250)):
+                fim_jogo = True
+
+        # sistema de obstáculos - fase-3, nivel-8
+        if tamanho_cobra == 8 and fase == 3:
+            desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
+            desenhar_anzol(anzol, posicao_x_anzol + 275, posicao_y_anzol - 100)
+            desenhar_anzol(anzol, posicao_x_anzol + 350, posicao_y_anzol - 300)
+            desenhar_anzol(anzol, posicao_x_anzol + 125, posicao_y_anzol + 250)
+            desenhar_anzol(anzol, posicao_x_anzol + 175, posicao_y_anzol - 250)
+            desenhar_anzol(anzol, posicao_x_anzol + 500, posicao_y_anzol - 200)
+            desenhar_anzol(anzol, posicao_x_anzol - 300, posicao_y_anzol - 200)
+            desenhar_anzol(anzol, posicao_x_anzol + 200, posicao_y_anzol + 50)
+            desenhar_anzol(anzol, posicao_x_anzol + 400, posicao_y_anzol - 125)
+            desenhar_anzol(anzol, posicao_x_anzol - 250, posicao_y_anzol + 200)
+            desenhar_anzol(anzol, posicao_x_anzol + 325, posicao_y_anzol + 350)
+            desenhar_anzol(anzol, posicao_x_anzol + 175, posicao_y_anzol + 250)
+            # colisões com o anzol
+            if ((x == posicao_x_anzol + 275 and y == posicao_y_anzol - 100) or (
+                    x == posicao_x_anzol + 350 and y == posicao_y_anzol - 300) or
+                    (x == posicao_x_anzol + 125 and y == posicao_y_anzol + 250) or (
+                            x == posicao_x_anzol + 175 and y == posicao_y_anzol - 250)):
+                fim_jogo = True
+            if ((x == posicao_x_anzol and y == posicao_y_anzol) or (
+                    x == posicao_x_anzol + 500 and y == posicao_y_anzol - 200) or
+                    (x == posicao_x_anzol - 300 and y == posicao_y_anzol - 200) or (
+                            x == posicao_x_anzol + 200 and y == posicao_y_anzol + 50) or
+                    (x == posicao_x_anzol + 400 and y == posicao_y_anzol - 125)):
+                fim_jogo = True
+            if ((x == posicao_x_anzol - 250 and y == posicao_y_anzol + 200) or
+                    (x == posicao_x_anzol + 325 and y == posicao_y_anzol + 350) or (
+                            x == posicao_x_anzol + 175 and y == posicao_y_anzol + 250)):
+                fim_jogo = True
+
         # desenhar comida
         desenhar_comida(comida, posicao_x_comida, posicao_y_comida)
 
@@ -287,10 +410,11 @@ def rodar_jogo():
         # atualização da tela
         pygame.display.update()
 
-
-        # criar uma nova comida
+        # criar uma nova comida e aumentar fase
         if x == posicao_x_comida and y == posicao_y_comida:
             tamanho_cobra += 1
+            if tamanho_cobra == 4 or tamanho_cobra == 7 or tamanho_cobra == 9:
+                fase+=1
             if boost_ativo:
                 pontuacao += 2
             else:
