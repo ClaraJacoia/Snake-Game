@@ -54,7 +54,6 @@ def tela_inicial():
             if evento.type == pygame.KEYDOWN and evento.key == pygame.K_SPACE:
                 aguardando_inicio = False
 
-
 def tela_final(pontuacao):  
     tela.fill(preta)
     texto_titulo = fonte.render("Game Over", True, rosa)
@@ -168,7 +167,6 @@ def rodar_jogo():
     velocidade_x = 0
     velocidade_y = 0
 
-
     tamanho_cobra = 1
     fase = 1
     
@@ -207,7 +205,7 @@ def rodar_jogo():
                     # Atualiza a direção apenas se a nova direção for válida
                     velocidade_x, velocidade_y = velocidade_x_nova, velocidade_y_nova
 
-        # sistema de obstáculos - fase-1, nivel-1
+        # sistema de obstáculos - nivel-1, fase-1
         if (tamanho_cobra == 1 and fase == 1):
             desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
             desenhar_anzol(anzol, posicao_x_anzol - 100, posicao_y_anzol - 100)
@@ -220,7 +218,7 @@ def rodar_jogo():
             (x == posicao_x_anzol+100 and y == posicao_y_anzol+25)):
                 fim_jogo = True
 
-        # sistema de obstáculos - fase-1, nivel-2
+        # sistema de obstáculos - nivel-2, fase-1
         if tamanho_cobra == 2 and fase == 1:
              desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
              desenhar_anzol(anzol, posicao_x_anzol + 150, posicao_y_anzol - 100)
@@ -233,7 +231,7 @@ def rodar_jogo():
             (x == posicao_x_anzol+125 and y == posicao_y_anzol+250)):
                     fim_jogo = True
 
-        # sistema de obstáculos - fase-1, nivel-3
+        # sistema de obstáculos - nivel-3, fase-1
         if tamanho_cobra == 3 and fase == 1:
             desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
             desenhar_anzol(anzol, posicao_x_anzol + 175, posicao_y_anzol - 100)
@@ -246,7 +244,7 @@ def rodar_jogo():
             (x == posicao_x_anzol-125 and y == posicao_y_anzol+250) or (x == posicao_x_anzol+175 and y == posicao_y_anzol+250)):
                 fim_jogo = True
 
-        # sistema de obstáculos - fase-2, nivel-4
+        # sistema de obstáculos - nivel-4, fase-2
         if tamanho_cobra == 4 and fase == 2:
             desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
             desenhar_anzol(anzol, posicao_x_anzol + 175, posicao_y_anzol - 100)
@@ -268,7 +266,7 @@ def rodar_jogo():
             (x == posicao_x_anzol+100 and y == posicao_y_anzol+25)):
                 fim_jogo = True
 
-        # sistema de obstáculos - fase-2, nivel-5
+        # sistema de obstáculos - nivel-5, fase-2
         if tamanho_cobra == 5 and fase == 2:
             desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
             desenhar_anzol(anzol, posicao_x_anzol + 150, posicao_y_anzol - 100)
@@ -292,7 +290,7 @@ def rodar_jogo():
             (x == posicao_x_anzol + 125 and y == posicao_y_anzol + 250)):
                 fim_jogo = True
 
-        # sistema de obstáculos - fase-2, nivel-6
+        # sistema de obstáculos - nivel-6, fase-2
         if tamanho_cobra == 6 and fase == 2:
             desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
             desenhar_anzol(anzol, posicao_x_anzol + 150, posicao_y_anzol - 100)
@@ -316,7 +314,7 @@ def rodar_jogo():
             (x == posicao_x_anzol + 125 and y == posicao_y_anzol + 250)):
                 fim_jogo = True
 
-        # sistema de obstáculos - fase-3, nivel-7
+        # sistema de obstáculos - nivel-7, fase-3
         if tamanho_cobra == 7 and fase == 3:
             desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
             desenhar_anzol(anzol, posicao_x_anzol - 175, posicao_y_anzol - 100)
@@ -347,7 +345,7 @@ def rodar_jogo():
             x == posicao_x_anzol + 175 and y == posicao_y_anzol + 250)):
                 fim_jogo = True
 
-        # sistema de obstáculos - fase-3, nivel-8
+        # sistema de obstáculos - nivel-8, fase-3
         if tamanho_cobra == 8 and fase == 3:
             desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
             desenhar_anzol(anzol, posicao_x_anzol + 275, posicao_y_anzol - 100)
@@ -378,7 +376,7 @@ def rodar_jogo():
             x == posicao_x_anzol + 175 and y == posicao_y_anzol + 250)):
                 fim_jogo = True
 
-        # sistema de obstáculos - fase-3, nivel-9
+        # sistema de obstáculos - nivel-9, fase-3
         if tamanho_cobra == 9 and fase == 3:
             desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
             desenhar_anzol(anzol, posicao_x_anzol + 475, posicao_y_anzol - 150)
@@ -409,7 +407,7 @@ def rodar_jogo():
             x == posicao_x_anzol + 175 and y == posicao_y_anzol + 250)):
                 fim_jogo = True
 
-        # sistema de obstáculos - fase-4, nivel-10
+        # sistema de obstáculos - nivel-10, fase-4
         if tamanho_cobra == 10 and fase == 4:
             desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
             desenhar_anzol(anzol, posicao_x_anzol + 475, posicao_y_anzol - 150)
@@ -516,7 +514,6 @@ def rodar_jogo():
 
         tempo_atual = pygame.time.get_ticks()
 
-
         # atualização da tela
         pygame.display.update()
 
@@ -545,7 +542,6 @@ def rodar_jogo():
             mostra_temporizador(tempo_restante // 1000)
         
             # atualiza o retangulo no qual o temporizador esta inserido para que seja possivel a contagem regressiva do tempo do boost
-
             pygame.display.update([0, 0, 100, 100])
         else:
             velocidade_jogo = 10
