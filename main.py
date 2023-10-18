@@ -7,6 +7,7 @@ largura, altura = 1000, 700
 tela = pygame.display.set_mode((largura, altura))
 relogio = pygame.time.Clock()
 fonte = pygame.font.Font(None, 36)
+highscore = 0
 
 # cores
 azul = (0,191,255)
@@ -55,14 +56,18 @@ def tela_inicial():
                 aguardando_inicio = False
 
 def tela_final(pontuacao):  
+    global highscore
     tela.fill(preta)
     texto_titulo = fonte.render("Game Over", True, rosa)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 100))
     texto_titulo = fonte.render(f"Pontos: {pontuacao}", True, azul)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 150))
+    # Highscore
+    texto_titulo = fonte.render("Sua maior pontuacao até agora tinha sido: " + str(highscore), True, azul)
+    tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 250))
     # Novo jogo
     jogar_de_novo = fonte.render("Pressione ESPAÇO para jogar novamente", True, branca)
-    tela.blit(jogar_de_novo, (largura // 3 - texto_titulo.get_width() // 1.6, 450))
+    tela.blit(jogar_de_novo, (largura // 2 - texto_titulo.get_width() // 1.6, 450))
     # Sair do jogo
     sair_jogo = fonte.render("Pressione ESC para sair do jogo", True, branca)
     tela.blit(sair_jogo, (largura // 3 - texto_titulo.get_width() // 6, 500))
@@ -79,6 +84,8 @@ def tela_final(pontuacao):
                 if evento.key == pygame.K_SPACE:
                     aguardando_escolha = False
                     # O jogador escolheu jogar novamente
+                    if pontuacao > highscore:
+                        highscore = pontuacao
                     pontuacao = rodar_jogo()
                     tela_final(pontuacao)
 
