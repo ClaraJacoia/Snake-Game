@@ -222,12 +222,12 @@ def rodar_jogo():
             desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
             desenhar_anzol(anzol, posicao_x_anzol - 100, posicao_y_anzol - 100)
             desenhar_anzol(anzol, posicao_x_anzol + 300, posicao_y_anzol - 200)
-            desenhar_anzol(anzol, posicao_x_anzol - 200, posicao_y_anzol + 45)
-            desenhar_anzol(anzol, posicao_x_anzol + 80, posicao_y_anzol + 30)
+            desenhar_anzol(anzol, posicao_x_anzol - 200, posicao_y_anzol + 50)
+            desenhar_anzol(anzol, posicao_x_anzol + 100, posicao_y_anzol + 25)
             # colisões com o anzol
             if ((x == posicao_x_anzol and y == posicao_y_anzol) or (x == posicao_x_anzol-100 and y == posicao_y_anzol-100) or
-            (x == posicao_x_anzol+300 and y == posicao_y_anzol-200) or (x == posicao_x_anzol-200 and y == posicao_y_anzol+45) or
-            (x == posicao_x_anzol+80 and y == posicao_y_anzol+30)):
+            (x == posicao_x_anzol+300 and y == posicao_y_anzol-200) or (x == posicao_x_anzol-200 and y == posicao_y_anzol+50) or
+            (x == posicao_x_anzol+100 and y == posicao_y_anzol+25)):
                 fim_jogo = True
 
         # sistema de obstáculos - fase-1, nivel-2
@@ -235,12 +235,12 @@ def rodar_jogo():
              desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
              desenhar_anzol(anzol, posicao_x_anzol + 150, posicao_y_anzol - 100)
              desenhar_anzol(anzol, posicao_x_anzol + 250, posicao_y_anzol + 200)
-             desenhar_anzol(anzol, posicao_x_anzol - 130, posicao_y_anzol + 180)
-             desenhar_anzol(anzol, posicao_x_anzol + 120, posicao_y_anzol + 250)
+             desenhar_anzol(anzol, posicao_x_anzol - 125, posicao_y_anzol + 175)
+             desenhar_anzol(anzol, posicao_x_anzol + 125, posicao_y_anzol + 250)
              # colisões com o anzol
              if ((x == posicao_x_anzol and y == posicao_y_anzol) or (x == posicao_x_anzol+150 and y == posicao_y_anzol-100) or
-                (x == posicao_x_anzol+250 and y == posicao_y_anzol+200) or (x == posicao_x_anzol-130 and y == posicao_y_anzol+180) or
-                (x == posicao_x_anzol+120 and y == posicao_y_anzol+250)):
+                (x == posicao_x_anzol+250 and y == posicao_y_anzol+200) or (x == posicao_x_anzol-125 and y == posicao_y_anzol+175) or
+                (x == posicao_x_anzol+125 and y == posicao_y_anzol+250)):
                     fim_jogo = True
 
         # sistema de obstáculos - fase-1, nivel-3
@@ -248,12 +248,12 @@ def rodar_jogo():
             desenhar_anzol(anzol, posicao_x_anzol, posicao_y_anzol)
             desenhar_anzol(anzol, posicao_x_anzol + 175, posicao_y_anzol - 100)
             desenhar_anzol(anzol, posicao_x_anzol - 250, posicao_y_anzol + 200)
-            desenhar_anzol(anzol, posicao_x_anzol - 130, posicao_y_anzol + 250)
-            desenhar_anzol(anzol, posicao_x_anzol + 180, posicao_y_anzol + 250)
+            desenhar_anzol(anzol, posicao_x_anzol - 125, posicao_y_anzol + 250)
+            desenhar_anzol(anzol, posicao_x_anzol + 175, posicao_y_anzol + 250)
             # colisões com o anzol
             if ((x == posicao_x_anzol and y == posicao_y_anzol) or
                 (x == posicao_x_anzol+175 and y == posicao_y_anzol-100) or (x == posicao_x_anzol-250 and y == posicao_y_anzol+200) or
-                (x == posicao_x_anzol-130 and y == posicao_y_anzol+250) or (x == posicao_x_anzol+180 and y == posicao_y_anzol+250)):
+                (x == posicao_x_anzol-125 and y == posicao_y_anzol+250) or (x == posicao_x_anzol+175 and y == posicao_y_anzol+250)):
                 fim_jogo = True
 
         # desenhar comida
