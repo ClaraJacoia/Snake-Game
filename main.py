@@ -22,9 +22,10 @@ fundo = (61, 212, 205)
 cabeca_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\cobra.png")
 corpo_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\cobra.png")
 cauda_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\cobra.png")
-comida = pygame.image.load("C:\\Snake-Game\\imagens\\nemo.png")
+comida = pygame.transform.scale(pygame.image.load("C:\\Snake-Game\\imagens\\nemo.png"),(35,30))
 boost = pygame.transform.scale(pygame.image.load("C:\\Snake-Game\\imagens\\raio.png"), (30, 30))
 anzol = pygame.transform.scale(pygame.image.load("C:\\Snake-Game\\imagens\\anzol.png"), (25, 25))
+fundo_oceano = pygame.transform.scale(pygame.image.load("C:\\Snake-Game\\imagens\\fundo_oceano.png"), (1000, 700))
 
 # parametros do jogo
 velocidade_jogo = 10
@@ -109,7 +110,7 @@ def tela_vencedor(pontuacao):
     texto_titulo = fonte.render(f"Pontos: {pontuacao}", True, azul)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 150))
     texto_titulo = fonte.render("Meus Parabéns!!! Você venceu nosso desafio!!", True, (255, 255, 0))
-    tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 1, 200))
+    tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 1, 250))
     # Highscore
     if pontuacao > highscore:
         highscore = pontuacao
@@ -260,7 +261,8 @@ def rodar_jogo():
         pixels.pop(0)
 
     while not fim_jogo:
-        tela.fill(fundo)
+
+        tela.blit(fundo_oceano,(0,0))
 
         tempo_atual = pygame.time.get_ticks()
 
