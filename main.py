@@ -36,7 +36,7 @@ def tela_inicial():
     texto_titulo = fonte.render("Snake Game: Ocean", True, (44,150,146))
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 150))
     # Instruções
-    texto_titulo = fonte.render("Use WASD para mover a Enguia", True, azul)
+    texto_titulo = fonte.render("Use W A S D para mover a Enguia", True, azul)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 250))
     texto_titulo = fonte.render("Devore o Nemo, fuja das paredes e de você mesmo!", True, azul)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 300))
@@ -63,7 +63,7 @@ def tela_final(pontuacao):
     global highscore
     tela.fill(preta)
     fonte = pygame.font.SysFont("Consolas", 33, 1)
-    texto_titulo = fonte.render("Game Over", True, vermelho)
+    texto_titulo = fonte.render("GAME OVER!", True, vermelho)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 100))
     texto_titulo = fonte.render(f"Pontos: {pontuacao}", True, azul)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 150))
