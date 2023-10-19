@@ -33,7 +33,7 @@ tamanho_quadrado = 25
 
 def tela_inicial():
     fonte = pygame.font.SysFont("Consolas", 32, 1)
-    texto_titulo = fonte.render("Snake Game: Ocean", True, (44,150,146))
+    texto_titulo = fonte.render("Snake Game: Ocean", True, (44, 150, 146))
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 150))
     # Instruções
     texto_titulo = fonte.render("Use W A S D para mover a Enguia", True, azul)
@@ -67,6 +67,49 @@ def tela_final(pontuacao):
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 100))
     texto_titulo = fonte.render(f"Pontos: {pontuacao}", True, azul)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 150))
+    # Highscore
+    if pontuacao > highscore:
+        highscore = pontuacao
+        texto_titulo = fonte.render("Nova pontuação máxima: " + str(highscore), True, fundo)
+    else:
+        texto_titulo = fonte.render("Pontuação máxima: " + str(highscore), True, fundo)
+    tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 300))
+    # Novo jogo
+    jogar_de_novo = fonte.render("Pressione ESPAÇO para jogar novamente", True, branca)
+    tela.blit(jogar_de_novo, (largura // 2 - texto_titulo.get_width() // 1, 450))
+    # Sair do jogo
+    sair_jogo = fonte.render("Pressione ESC para sair do jogo", True, branca)
+    tela.blit(sair_jogo, (largura // 3 - texto_titulo.get_width() // 2, 500))
+
+    pygame.display.update()
+
+    aguardando_escolha = True
+    while aguardando_escolha:
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_SPACE:
+                    aguardando_escolha = False
+                    # O jogador escolheu jogar novamente
+                    pontuacao = rodar_jogo()
+                    tela_final(pontuacao)
+                elif evento.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    quit()
+
+
+def tela_vencedor(pontuacao):
+    global highscore
+    tela.fill(preta)
+    fonte = pygame.font.SysFont("Consolas", 33, 1)
+    texto_titulo = fonte.render("YOU WIN!!", True, (255, 255, 0))
+    tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 100))
+    texto_titulo = fonte.render(f"Pontos: {pontuacao}", True, azul)
+    tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 150))
+    texto_titulo = fonte.render("Meus Parabéns!!! Você venceu nosso desafio!!", True, (255, 255, 0))
+    tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 1, 200))
     # Highscore
     if pontuacao > highscore:
         highscore = pontuacao
@@ -476,6 +519,9 @@ def rodar_jogo():
             desenhar_anzol(anzol, posicao_x_anzol + 125, posicao_y_anzol - 300)
             desenhar_anzol(anzol, posicao_x_anzol + 25, posicao_y_anzol - 250)
             desenhar_anzol(anzol, posicao_x_anzol + 150, posicao_y_anzol - 125)
+
+
+
             # colisões com o anzol
             if ((x == posicao_x_anzol - 475 and y == posicao_y_anzol - 150) or (
                     x == posicao_x_anzol + 350 and y == posicao_y_anzol - 300) or
@@ -519,6 +565,9 @@ def rodar_jogo():
                             x == posicao_x_anzol + 25 and y == posicao_y_anzol - 250) or
                     (x == posicao_x_anzol + 150 and y == posicao_y_anzol - 125)):
                 fim_jogo = True
+
+        elif tamanho_cobra > 10 and fase != (1, 2, 3, 4):
+            tela_vencedor(pontuacao)
 
         # desenhar comida
         desenhar_comida(comida, posicao_x_comida, posicao_y_comida)
