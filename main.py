@@ -19,9 +19,9 @@ preta = (0, 0, 0)
 fundo = (61, 212, 205)
 
 # carregamento das imagens
-cabeca_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\cabeca_cobra.png")
-corpo_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\corpo_cobra.png")
-cauda_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\cauda_cobra.png")
+cabeca_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\cobra.png")
+corpo_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\cobra.png")
+cauda_cobra = pygame.image.load("C:\\Snake-Game\\imagens\\cobra.png")
 comida = pygame.image.load("C:\\Snake-Game\\imagens\\nemo.png")
 boost = pygame.transform.scale(pygame.image.load("C:\\Snake-Game\\imagens\\raio.png"), (30, 30))
 anzol = pygame.transform.scale(pygame.image.load("C:\\Snake-Game\\imagens\\anzol.png"), (25, 25))
@@ -62,24 +62,24 @@ def tela_inicial():
 def tela_final(pontuacao):
     global highscore
     tela.fill(preta)
-    fonte = pygame.font.SysFont("Consolas", 32, 1)
-    texto_titulo = fonte.render("Game Over", True, rosa)
+    fonte = pygame.font.SysFont("Consolas", 33, 1)
+    texto_titulo = fonte.render("Game Over", True, vermelho)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 100))
     texto_titulo = fonte.render(f"Pontos: {pontuacao}", True, azul)
     tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 150))
     # Highscore
     if pontuacao > highscore:
         highscore = pontuacao
-        texto_titulo = fonte.render("Nova pontuação máxima: " + str(highscore), True, azul)
+        texto_titulo = fonte.render("Nova pontuação máxima: " + str(highscore), True, fundo)
     else:
-        texto_titulo = fonte.render("Pontuação máxima " + str(highscore), True, azul)
-    tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 250))
+        texto_titulo = fonte.render("Pontuação máxima: " + str(highscore), True, fundo)
+    tela.blit(texto_titulo, (largura // 2 - texto_titulo.get_width() // 2, 300))
     # Novo jogo
     jogar_de_novo = fonte.render("Pressione ESPAÇO para jogar novamente", True, branca)
-    tela.blit(jogar_de_novo, (largura // 2 - texto_titulo.get_width() // 1.6, 450))
+    tela.blit(jogar_de_novo, (largura // 2 - texto_titulo.get_width() // 1, 450))
     # Sair do jogo
     sair_jogo = fonte.render("Pressione ESC para sair do jogo", True, branca)
-    tela.blit(sair_jogo, (largura // 3 - texto_titulo.get_width() // 4, 500))
+    tela.blit(sair_jogo, (largura // 3 - texto_titulo.get_width() // 2, 500))
 
     pygame.display.update()
 
